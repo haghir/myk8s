@@ -5,9 +5,6 @@ metadata:
   labels:
     {{- include "openldap.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "openldap.selectorLabels" . | nindent 6 }}
@@ -20,9 +17,6 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        volumeMounts:
-        - name: data
-          mountPath: /var/lib/ldap
         ports:
         - name: ldap
           containerPort: 389
@@ -31,12 +25,10 @@ spec:
           containerPort: 636
           protocol: TCP
         env:
+        - name: "LDAP_DOMAIN"
+          value: "{{ .Values.domain }}"
         - name: "LDAP_ADMIN_PASSWORD"
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.openldap.adminPassword.secretName }}
-              key: {{ .Values.openldap.adminPassword.key }}
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: {{ include "openldap.storages.data.name" }}
+              name: {{ .Values.admin.password.secretName }}
+              key: {{ .Values.admin.password.key }}

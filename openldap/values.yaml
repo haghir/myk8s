@@ -11,23 +11,14 @@ services:
   type: NodePort
   ldap:
     port: 389
-    nodePort: 389
+    nodePort: 30389
   ldaps:
     port: 636
-    nodePort: 636
-
-storages:
-  data:
-    size: 10Mi
-    path: <path to data storage>
-    hostname: <hostname>
+    nodePort: 30636
 
 admin:
-  name: <admin name>
   password:
     secretName: <secret name for admin password>
     key: <secret key for admin password>
-
-basedn: <base dn>
 
 domain: <domain>

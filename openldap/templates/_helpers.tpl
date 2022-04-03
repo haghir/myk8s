@@ -60,17 +60,3 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
-
-{{/*
- Create the name of the storage containing LDAP database
- */}}
-{{- define "openldap.storages.data.name" -}}
-{{- printf "%s-storage-data" (include "openldap.fullname" .) -}}
-{{- end -}}
-
-{{/*
-Create the name of the data storage
-*/}}
-{{- define "openldap.storages.data.name" -}}
-{{- printf "%s-storage-data" (include "openldap.fullname") -}}
-{{- end -}}
