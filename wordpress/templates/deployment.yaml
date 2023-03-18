@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "redmine.fullname" . }}
+  name: {{ include "wordpress.fullname" . }}
   labels:
-    {{- include "redmine.labels" . | nindent 4 }}
+    {{- include "wordpress.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "redmine.selectorLabels" . | nindent 6 }}
+      {{- include "wordpress.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "redmine.selectorLabels" . | nindent 8 }}
+        {{- include "wordpress.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
@@ -23,26 +23,29 @@ spec:
           containerPort: {{ .Values.service.port }}
           protocol: TCP
         volumeMounts:
-        - name: files
-          mountPath: /usr/src/redmine/files
+        - name: html
+          mountPath: /var/www/html
         env:
-        - name: REDMINE_DB_MYSQL
+        - name: WORDPRESS_DB_HOST
           value: {{ .Values.db.host }}
-        - name: REDMINE_DB_PORT
-          value: {{ .Values.db.port }}
-        - name: REDMINE_DB_USERNAME
+        - name: WORDPRESS_DB_USER
           valueFrom:
             secretKeyRef:
               name: {{ .Values.db.user.secretName }}
               key: {{ .Values.db.user.keys.username }}
-        - name: REDMINE_DB_PASSWORD
+        - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ .Values.db.user.secretName }}
               key: {{ .Values.db.user.keys.password }}
-        - name: REDMINE_DB_DATABASE
+        - name: WORDPRESS_DB_NAME
           value: {{ .Values.db.dbname }}
-      volumes:
-      - name: files
-        persistentVolumeClaim:
-          claimName: {{ include "redmine.storage.files.name" . }}
+        - name: WORDPRESS_CONFIG_EXTRA
+          value: |
+            define('WP_HOME','http://localhost/wordpress');
+            define('WP_SITEURL','http://localhost/wordpress');
+            $_SERVER['REQUEST_URI'] = str_replace('/wp-admin/', '/wordpress/wp-admin/', $_SERVER['REQUEST_URI']);
+    volumes:
+    - name: html
+      persistentVolumeClaim:
+        claimName: {{ include "wordpress.storage.html.name" }}

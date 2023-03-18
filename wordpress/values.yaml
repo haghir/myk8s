@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: localhost:32000/my-redmine
+  repository: wordpress
   pullPolicy: IfNotPresent
 
 service:
@@ -10,7 +10,6 @@ service:
 
 db:
   host: <MySQL host>
-  port: 3306
   user:
     secretName: <secret name>
     keys:
@@ -18,7 +17,7 @@ db:
       password: password
 
 storage:
-  files:
+  html:
     size: 10Gi
     path: <path to the directory>
     hostname: <hostname>
