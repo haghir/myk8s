@@ -16,8 +16,9 @@ db:
     keys:
       username: username
       password: password
+  dbname: <dbname>
 
-storage:
+storages:
   html:
     size: 10Gi
     path: <path to the directory>

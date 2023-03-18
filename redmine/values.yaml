@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: localhost:32000/my-redmine
+  repository: <repository>
   pullPolicy: IfNotPresent
   tag: latest
 
@@ -17,8 +17,9 @@ db:
     keys:
       username: username
       password: password
+  dbname: <dbname>
 
-storage:
+storages:
   files:
     size: 10Gi
     path: <path to the directory>

@@ -27,22 +27,22 @@ spec:
           mountPath: /usr/src/redmine/files
         env:
         - name: REDMINE_DB_MYSQL
-          value: {{ .Values.db.host }}
+          value: "{{ .Values.db.host }}"
         - name: REDMINE_DB_PORT
-          value: {{ .Values.db.port }}
+          value: "{{ .Values.db.port }}"
         - name: REDMINE_DB_USERNAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.db.user.secretName }}
-              key: {{ .Values.db.user.keys.username }}
+              name: "{{ .Values.db.user.secretName }}"
+              key: "{{ .Values.db.user.keys.username }}"
         - name: REDMINE_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.db.user.secretName }}
-              key: {{ .Values.db.user.keys.password }}
+              name: "{{ .Values.db.user.secretName }}"
+              key: "{{ .Values.db.user.keys.password }}"
         - name: REDMINE_DB_DATABASE
-          value: {{ .Values.db.dbname }}
+          value: "{{ .Values.db.dbname }}"
       volumes:
       - name: files
         persistentVolumeClaim:
-          claimName: {{ include "redmine.storage.files.name" . }}
+          claimName: {{ include "redmine.storages.files.name" . }}

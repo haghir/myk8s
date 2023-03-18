@@ -45,7 +45,7 @@ spec:
             define('WP_HOME','http://localhost/wordpress');
             define('WP_SITEURL','http://localhost/wordpress');
             $_SERVER['REQUEST_URI'] = str_replace('/wp-admin/', '/wordpress/wp-admin/', $_SERVER['REQUEST_URI']);
-    volumes:
-    - name: html
-      persistentVolumeClaim:
-        claimName: {{ include "wordpress.storage.html.name" }}
+      volumes:
+      - name: html
+        persistentVolumeClaim:
+          claimName: {{ include "wordpress.storages.html.name" . }}
