@@ -3,6 +3,7 @@ replicaCount: 1
 image:
   repository: wordpress
   pullPolicy: IfNotPresent
+  tag: latest
 
 service:
   type: ClusterIP

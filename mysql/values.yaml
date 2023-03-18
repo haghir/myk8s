@@ -1,11 +1,10 @@
 replicaCount: 1
-nameOverride: ""
-fullnameOverride: ""
 
 image:
-  repository: mariadb
-  version: latest
+  repository: nginx
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
 
 service:
   type: ClusterIP
@@ -13,11 +12,11 @@ service:
 
 storages:
   data:
-    size: 2Gi
+    size: 10Gi
     path: <path to storage>
     hostname: <hostname>
 
-mariadb:
+db:
   rootPassword:
-    secretName: mariadb-env
+    secretName: <secret name>
     key: rootPassword

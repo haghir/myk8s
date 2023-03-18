@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ include "mariadb.storages.data.name" . }}
+  name: {{ include "mysql.storages.data.name" . }}
 spec:
   capacity:
     storage: "{{ .Values.storages.data.size }}"
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ include "mariadb.storages.data.name" . }}
+  storageClassName: {{ include "mysql.storages.data.name" . }}
   local:
     path: {{ .Values.storages.data.path }}
   nodeAffinity:

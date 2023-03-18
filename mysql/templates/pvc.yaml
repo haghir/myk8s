@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "mariadb.storages.data.name" . }}
+  name: {{ include "mysql.storages.data.name" . }}
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   volumeMode: Filesystem
   resources:
     requests:
       storage: "{{ .Values.storages.data.size }}"
-  storageClassName: {{ include "mariadb.storages.data.name" . }}
+  storageClassName: {{ include "mysql.storages.data.name" . }}
