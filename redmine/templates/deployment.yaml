@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "redmine.fullname" . }}
+  labels:
+    {{- include "redmine.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "redmine.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "redmine.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.port }}
+          protocol: TCP
+        volumeMounts:
+        - name: files
+          mountPath: /usr/src/redmine/files
+        env:
+        - name: REDMINE_DB_MYSQL
+          value: {{ .Values.db.host }}
+        - name: REDMINE_DB_PORT
+          value: {{ .Values.db.port }}
+        - name: REDMINE_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.db.user.secretName }}
+              key: {{ .Values.db.user.name.key }}
+        - name: REDMINE_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.db.user.secretName }}
+              key: {{ .Values.db.user.password.key }}
+        - name: REDMINE_DB_DATABASE
+          value: {{ .Values.db.dbname }}
+      volumes:
+      - name: files
+        persistentVolumeClaim:
+          claimName: {{ include "redmine.storage.files.name" . }}

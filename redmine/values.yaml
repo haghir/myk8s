@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: localhost:32000/my-redmine
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+db:
+  host: <MySQL host>
+  port: 3306
+  user:
+    name:
+      secretName: <secret name>
+      key: username
+    password:
+      secretName: <secret name>
+      key: password
+
+storage:
+  files:
+    size: 10Gi
+    path: <path to the directory>
+    hostname: <hostname>
