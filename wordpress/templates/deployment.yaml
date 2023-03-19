@@ -42,8 +42,8 @@ spec:
           value: {{ .Values.db.dbname }}
         - name: WORDPRESS_CONFIG_EXTRA
           value: |
-            define('WP_HOME','http://localhost/wordpress');
-            define('WP_SITEURL','http://localhost/wordpress');
+            define('WP_HOME','http://{{ .Values.service.host }}/wordpress');
+            define('WP_SITEURL','http://{{ .Values.service.host }}/wordpress');
             $_SERVER['REQUEST_URI'] = str_replace('/wp-admin/', '/wordpress/wp-admin/', $_SERVER['REQUEST_URI']);
       volumes:
       - name: html
