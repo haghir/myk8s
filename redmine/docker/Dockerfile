@@ -1,5 +1,7 @@
 FROM redmine:latest
-RUN sed -i -e 's|Rails\.application\.initialize!|RedmineApp::Application.routes.default_scope = "/redmine"\nRails.application.initialize!\nRedmine::Utils::relative_url_root = "/redmine"|g' /usr/src/redmine/config/environment.rb && \
+RUN cd /usr/src/redmine/config && \
+    sed -i "15 i RedmineApp::Application.routes.default_scope = \"/redmine\"\n" environment.rb && \
+    echo "\nRedmine::Utils::relative_url_root = \"/redmine\"" >> environment.rb && \
     mkdir /usr/src/redmine/public/redmine && \
     cd /usr/src/redmine/public/redmine && \
     ln -s ../help . && \
