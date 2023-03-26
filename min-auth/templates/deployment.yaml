@@ -23,6 +23,8 @@ spec:
           containerPort: 3000
           protocol: TCP
         env:
+        - name: RUST_LOG
+          value: "{{ .Values.rust.log }}"
         - name: REDIS_URI
           value: "{{ .Values.redis.uri }}"
         - name: REDIS_LIFETIME
