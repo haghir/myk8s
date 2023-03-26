@@ -10,7 +10,7 @@ service:
   port: 80
 
 mysql:
-  host: mysql.local
+  host: mysql
   port: 3306
   user:
     secretName: "min-auth-secret"
@@ -20,7 +20,7 @@ mysql:
   dbname: minauth
 
 redis:
-  uri: redis://redis.local/0
+  uri: redis://redis/0
   lifetime: 3600
 
 passwordSecret:
