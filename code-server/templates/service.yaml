@@ -9,11 +9,7 @@ spec:
   ports:
   - name: http
     port: {{ .Values.services.http.port }}
-    targetPort: 8080
-    protocol: TCP
-  - name: dev
-    port: {{ .Values.services.dev.port }}
-    targetPort: 3000
+    targetPort: 8443
     protocol: TCP
   selector:
     {{- include "code-server.selectorLabels" . | nindent 4 }}

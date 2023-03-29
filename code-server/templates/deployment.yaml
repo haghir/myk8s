@@ -4,6 +4,12 @@ metadata:
   name: {{ include "code-server.fullname" . }}
   labels:
     {{- include "code-server.labels" . | nindent 4 }}
+    traefik.enable: "true"
+    traefik.http.middlewares.vscode-stripprefix.stripprefix.prefixes: /code-server
+    traefik.http.routers.vscode.entrypoints: websecure
+    traefik.http.routers.vscode.middlewares: vscode-stripprefix
+    traefik.http.routers.vscode.rule: Host(`$DOMAIN`) && PathPrefix(`/code-server`)
+    traefik.http.services.vscode.loadbalancer.server.port: "8443"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -20,18 +26,15 @@ spec:
         fsGroup: 1000
       containers:
       - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - name: http
-          containerPort: 8080
-          protocol: TCP
-        - name: dev
-          containerPort: 3000
+          containerPort: 8443
           protocol: TCP
         volumeMounts:
         - name: home
-          mountPath: /home/coder
+          mountPath: /config
       volumes:
       - name: home
         persistentVolumeClaim:
