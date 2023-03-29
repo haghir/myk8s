@@ -4,12 +4,6 @@ metadata:
   name: {{ include "code-server.fullname" . }}
   labels:
     {{- include "code-server.labels" . | nindent 4 }}
-    traefik.enable: "true"
-    traefik.http.middlewares.vscode-stripprefix.stripprefix.prefixes: /code-server
-    traefik.http.routers.vscode.entrypoints: websecure
-    traefik.http.routers.vscode.middlewares: vscode-stripprefix
-    traefik.http.routers.vscode.rule: Host(`$DOMAIN`) && PathPrefix(`/code-server`)
-    traefik.http.services.vscode.loadbalancer.server.port: "8443"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
