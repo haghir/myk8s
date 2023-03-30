@@ -19,12 +19,8 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-body-size: "1g"
-  hosts:
-  - host: <default>
-    paths:
-    - path: /
-      pathType: ImplementationSpecific
-  - host: <code-server>
+  host:
+    hostname: <hostname>
     paths:
     - path: /
       pathType: ImplementationSpecific
