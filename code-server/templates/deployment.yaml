@@ -14,10 +14,6 @@ spec:
       labels:
         {{- include "code-server.selectorLabels" . | nindent 8 }}
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -29,6 +25,13 @@ spec:
         volumeMounts:
         - name: home
           mountPath: /config
+        env:
+        - name: PUID
+          value: "{{ .Values.env.puid }}"
+        - name: PGID
+          value: "{{ .Values.env.pgid }}"
+        - name: TZ
+          value: "{{ .Values.env.tz }}"
       volumes:
       - name: home
         persistentVolumeClaim:

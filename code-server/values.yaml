@@ -5,6 +5,11 @@ image:
   pullPolicy: IfNotPresent
   tag: latest
 
+env:
+  puid: 1000
+  pgid: 1000
+  tz: Etc/UTC
+
 services:
   http:
     type: ClusterIP
@@ -14,4 +19,4 @@ storages:
   home:
     size: 10Gi
     path: <path to the directory>
-    hostname: example
+    hostname: <hostname>

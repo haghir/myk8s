@@ -13,13 +13,13 @@ service:
   port: 80
 
 db:
-  host: <MySQL host>
+  host: mysql
   user:
-    secretName: <secret name>
+    secretName: wordpress-secret
     keys:
       username: username
       password: password
-  dbname: <dbname>
+  dbname: wordpress
 
 storages:
   html:

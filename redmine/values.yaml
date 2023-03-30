@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: <repository>
+  repository: localhost:32000/redmine
   pullPolicy: IfNotPresent
   tag: latest
 
@@ -10,14 +10,14 @@ service:
   port: 80
 
 db:
-  host: <MySQL host>
+  host: mysql
   port: 3306
   user:
-    secretName: <secret name>
+    secretName: redmine-secret
     keys:
       username: username
       password: password
-  dbname: <dbname>
+  dbname: redmine
 
 storages:
   files:

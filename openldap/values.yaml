@@ -16,9 +16,9 @@ services:
     port: 636
     nodePort: 30636
 
-admin:
-  password:
-    secretName: <secret name for admin password>
-    key: <secret key for admin password>
-
-domain: <domain>
+env:
+  domain: <domain>
+  admin:
+    password:
+      secretName: openldap-secret
+      key: admin-password

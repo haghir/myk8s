@@ -18,5 +18,5 @@ storages:
 
 db:
   rootPassword:
-    secretName: <secret name>
+    secretName: mysql-secret
     key: rootPassword
