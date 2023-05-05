@@ -1,6 +1,6 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: {{ include "web-server.storages.config.name" . }}
+  name: {{ include "nginx.storages.config.name" . }}
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer

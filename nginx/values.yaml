@@ -19,15 +19,28 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-body-size: "1g"
-  host:
-    hostname: <hostname>
+  domain: <domain>
+  hosts:
+  - host: gitlab
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  - host: vscode
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  - host: redmine
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  - host: wordpress
     paths:
     - path: /
       pathType: ImplementationSpecific
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  #- secretName: chart-example-tls
+  #  hosts:
+  #  - chart-example
 
 storages:
   config:

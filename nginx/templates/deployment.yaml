@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "web-server.fullname" . }}
+  name: {{ include "nginx.fullname" . }}
   labels:
-    {{- include "web-server.labels" . | nindent 4 }}
+    {{- include "nginx.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "web-server.selectorLabels" . | nindent 6 }}
+      {{- include "nginx.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "web-server.selectorLabels" . | nindent 8 }}
+        {{- include "nginx.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
@@ -28,4 +28,4 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: {{ include "web-server.storages.config.name" . }}
+          claimName: {{ include "nginx.storages.config.name" . }}

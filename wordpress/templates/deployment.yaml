@@ -40,11 +40,6 @@ spec:
               key: {{ .Values.db.user.keys.password }}
         - name: WORDPRESS_DB_NAME
           value: {{ .Values.db.dbname }}
-        - name: WORDPRESS_CONFIG_EXTRA
-          value: |
-            define('WP_HOME','http://{{ .Values.web.host }}/wordpress');
-            define('WP_SITEURL','http://{{ .Values.web.host }}/wordpress');
-            $_SERVER['REQUEST_URI'] = str_replace('/wp-admin/', '/wordpress/wp-admin/', $_SERVER['REQUEST_URI']);
       volumes:
       - name: html
         persistentVolumeClaim:

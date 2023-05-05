@@ -1,5 +1,6 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "web-server.fullname" . -}}
+{{- $fullName := include "nginx.fullname" . -}}
+{{- $domain := .Values.ingress.domain -}}
 {{- $svcPort := .Values.service.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
@@ -17,7 +18,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "web-server.labels" . | nindent 4 }}
+    {{- include "nginx.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -31,16 +32,17 @@ spec:
     {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
-        - {{ . | quote }}
+        - {{ printf "%s.%s" . $domain | quote }}
         {{- end }}
       secretName: {{ .secretName }}
     {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.host.hostname | quote }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ printf "%s.%s" .host $domain | quote }}
       http:
         paths:
-          {{- range .Values.ingress.host.paths }}
+          {{- range .paths }}
           - path: {{ .path }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .pathType }}
@@ -56,4 +58,5 @@ spec:
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
+    {{- end }}
 {{- end }}
