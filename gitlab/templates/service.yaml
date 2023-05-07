@@ -1,34 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "gitlab.services.http.name" . }}
+  name: {{ include "gitlab.fullname" . }}
   labels:
     {{- include "gitlab.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.services.http.type }}
+  type: {{ .Values.services.type }}
   ports:
   - name: http
     port: {{ .Values.services.http.port }}
     targetPort: http
     protocol: TCP
-  selector:
-    {{- include "gitlab.selectorLabels" . | nindent 4 }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "gitlab.services.ssh.name" . }}
-  labels:
-    {{- include "gitlab.labels" . | nindent 4 }}
-spec:
-  type: {{ .Values.services.ssh.type }}
-  ports:
   - name: ssh
     port: {{ .Values.services.ssh.port }}
-    targetPort: 22
-    {{- with .Values.services.ssh.nodePort }}
-    nodePort: {{ . }}
-    {{- end }}
+    targetPort: ssh
     protocol: TCP
   selector:
     {{- include "gitlab.selectorLabels" . | nindent 4 }}

@@ -62,6 +62,20 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
+Create the name of the HTTP service
+*/}}
+{{- define "nginx.services.http.name" -}}
+{{- printf "%s-service-http" (include "nginx.fullname" .) -}}
+{{- end -}}
+
+{{/*
+Create the name of the SSH service
+*/}}
+{{- define "nginx.services.ssh.name" -}}
+{{- printf "%s-service-ssh" (include "nginx.fullname" .) -}}
+{{- end -}}
+
+{{/*
 Create the name of the config storage
 */}}
 {{- define "nginx.storages.config.name" -}}

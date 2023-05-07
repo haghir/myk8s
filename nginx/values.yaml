@@ -7,8 +7,13 @@ image:
   tag: "latest"
 
 service:
-  type: ClusterIP
-  port: 80
+  http:
+    type: ClusterIP
+    port: 80
+  ssh:
+    type: NodePort
+    port: 22
+    nodePort: 30022
 
 ingress:
   enabled: true

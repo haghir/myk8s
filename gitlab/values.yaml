@@ -5,32 +5,11 @@ image:
   pullPolicy: IfNotPresent
 
 services:
+  type: ClusterIP
   http:
-    type: ClusterIP
     port: 80
   ssh:
-    type: NodePort
     port: 22
-    nodePort: 30221
-
-ingress:
-  enabled: true
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-body-size: "1g"
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth
-    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
-  hosts:
-  - host: gitlab.example.local
-    paths: [ "/" ]
-  tls:
-  - secretName: tls-certificate
-    hosts:
-    - gitlab.example.local
 
 storages:
   data:
