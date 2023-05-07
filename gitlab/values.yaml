@@ -3,6 +3,7 @@ replicaCount: 1
 image:
   repository: gitlab/gitlab-ce
   pullPolicy: IfNotPresent
+  tag: latest
 
 services:
   type: ClusterIP
