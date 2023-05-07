@@ -6,7 +6,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-service:
+services:
   http:
     type: ClusterIP
     port: 80
