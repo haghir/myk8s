@@ -9,7 +9,7 @@ spec:
   ports:
   - name: http
     port: {{ .Values.services.http.port }}
-    targetPort: 8443
+    targetPort: http
     protocol: TCP
   selector:
     {{- include "code-server.selectorLabels" . | nindent 4 }}

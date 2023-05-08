@@ -8,14 +8,14 @@ spec:
   type: {{ .Values.services.type }}
   ports:
   - port: {{ .Values.services.ldap.port }}
-    targetPort: 389
+    targetPort: ldap
     {{- with .Values.services.ldap.nodePort}}
     nodePort: {{ . }}
     {{- end}}
     protocol: TCP
     name: ldap
   - port: {{ .Values.services.ldaps.port }}
-    targetPort: 636
+    targetPort: ldaps
     {{- with .Values.services.ldaps.nodePort}}
     nodePort: {{ . }}
     {{- end}}
