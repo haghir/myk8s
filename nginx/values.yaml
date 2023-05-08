@@ -12,7 +12,7 @@ services:
     port: 80
   ssh:
     type: NodePort
-    port: 22
+    port: 30022
     nodePort: 30022
 
 ingress:
