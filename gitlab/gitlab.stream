@@ -3,7 +3,7 @@ upstream ssh {
 }
 
 server {
-    listen       30022;
-    listen  [::]:30022;
+    listen       22;
+    listen  [::]:22;
     proxy_pass ssh;
 }
