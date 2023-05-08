@@ -22,8 +22,8 @@ spec:
         - name: http
           containerPort: 80
           protocol: TCP
-        - name: ssh
-          containerPort: 22
+        - name: gitlab-ssh
+          containerPort: 30022
           protocol: TCP
         volumeMounts:
         - name: config

@@ -23,9 +23,9 @@ metadata:
 spec:
   type: {{ .Values.services.ssh.type }}
   ports:
-  - name: ssh
+  - name: gitlab-ssh
     port: {{ .Values.services.ssh.port }}
-    targetPort: 22
+    targetPort: gitlab-ssh
     {{- with .Values.services.ssh.nodePort }}
     nodePort: {{ . }}
     {{- end }}
