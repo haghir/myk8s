@@ -21,12 +21,12 @@ metadata:
   labels:
     {{- include "nginx.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.services.gitlab-ssh.type }}
+  type: {{ .Values.services.gitlab_ssh.type }}
   ports:
   - name: gitlab-ssh
-    port: {{ .Values.services.gitlab-ssh.port }}
+    port: {{ .Values.services.gitlab_ssh.port }}
     targetPort: gitlab-ssh
-    {{- with .Values.services.gitlab-ssh.nodePort }}
+    {{- with .Values.services.gitlab_ssh.nodePort }}
     nodePort: {{ . }}
     {{- end }}
     protocol: TCP

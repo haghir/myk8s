@@ -10,7 +10,7 @@ services:
   http:
     type: ClusterIP
     port: 80
-  gitlab-ssh:
+  gitlab_ssh:
     type: NodePort
     port: 30022
     nodePort: 30022
