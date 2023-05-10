@@ -69,10 +69,10 @@ Create the name of the HTTP service
 {{- end -}}
 
 {{/*
-Create the name of the SSH service
+Create the name of the stream service
 */}}
-{{- define "nginx.services.ssh.name" -}}
-{{- printf "%s-service-ssh" (include "nginx.fullname" .) -}}
+{{- define "nginx.services.stream.name" -}}
+{{- printf "%s-service-stream" (include "nginx.fullname" .) -}}
 {{- end -}}
 
 {{/*
