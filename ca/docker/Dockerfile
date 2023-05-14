@@ -1,13 +1,10 @@
-FROM ubuntu:latest
-RUN apt update && apt upgrade -y && apt autoremove -y && apt install -y openssh-server openssl
-RUN mkdir /run/sshd /root/.ssh && chmod 700 /root/.ssh
-COPY default.conf /etc/ssh/sshd_config.d
-
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-
-EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
+FROM linuxserver/code-server:latest
+RUN apt update && apt -y upgrade && apt -y autoremove && apt -y install openssl
+RUN sed -i 's|dir\s*=\s*/\./demoCA|dir\t\t= /etc/ssl/CA|g' /etc/ssl/openssl.cnf && \
+    sed -i 's|policy\s*=\s*policy_match|policy\t\t= policy_anything|g' /etc/ssl/openssl.cnf
+RUN mkdir -p /etc/ssl/CA/certs /etc/ssl/CA/private /etc/ssl/CA/crl /etc/ssl/CA/newcerts && \
+    chmod 700 /etc/ssl/CA/private && \
+    echo "01" > /etc/ssl/CA/serial && \
+    echo "00" > /etc/ssl/CA/crlnumber && \
+    touch /etc/ssl/CA/index.txt
+VOLUME ["/etc/ssl/CA"]
