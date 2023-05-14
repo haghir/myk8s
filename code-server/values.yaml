@@ -20,3 +20,8 @@ storages:
     size: 10Gi
     path: <path to the directory>
     hostname: <hostname>
+
+sudo:
+  passwordHash:
+    secretName: code-server-secret
+    key: sudo-password-hash

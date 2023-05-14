@@ -32,6 +32,11 @@ spec:
           value: "{{ .Values.env.pgid }}"
         - name: TZ
           value: "{{ .Values.env.tz }}"
+        - name: SUDO_PASSWORD_HASH
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.sudo.passwordHash.secretName }}
+              key: {{ .Values.sudo.passwordHash.key }}
       volumes:
       - name: home
         persistentVolumeClaim:
