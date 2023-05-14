@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-RUN apt update && apt upgrade -y && apt autoremove -y && apt install -y openssh-server
+RUN apt update && apt upgrade -y && apt autoremove -y && apt install -y openssh-server openssl
 RUN mkdir /run/sshd /root/.ssh && chmod 700 /root/.ssh
 COPY default.conf /etc/ssh/sshd_config.d
 
