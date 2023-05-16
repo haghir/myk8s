@@ -19,7 +19,7 @@ fi
 if [ ! -f "/etc/ssl/CA/crlnumber" ] ; then
     echo "00" > /etc/ssl/CA/crlnumber
 fi
-if [ ! -f "/etc/ssl/CA/index.txt"] ; then
+if [ ! -f "/etc/ssl/CA/index.txt" ] ; then
     touch /etc/ssl/CA/index.txt
 fi
 
