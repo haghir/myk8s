@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "root-ca.fullname" . }}
+  labels:
+    {{- include "root-ca.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "root-ca.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "root-ca.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - name: http
+            containerPort: 8443
+            protocol: TCP
+        volumeMounts:
+        - name: home
+          mountPath: /config
+        - name: ssl
+          mountPath: /etc/ssl/CA
+        env:
+        - name: PUID
+          value: "{{ .Values.env.puid }}"
+        - name: PGID
+          value: "{{ .Values.env.pgid }}"
+        - name: TZ
+          value: "{{ .Values.env.tz }}"
+        - name: SUDO_PASSWORD_HASH
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.sudo.passwordHash.secretName }}
+              key: {{ .Values.sudo.passwordHash.key }}
+      volumes:
+      - name: home
+        persistentVolumeClaim:
+          claimName: {{ include "code-server.storages.home.name" . }}
+      - name: ssl
+        persistentVolumeClaim:
+          claimName: {{ include "code-server.storages.ssl.name" . }}

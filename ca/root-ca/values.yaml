@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+env:
+  puid: 1000
+  pgid: 1000
+  tz: Etc/UTC
+
+service:
+  type: ClusterIP
+  port: 80
+
+storages:
+  home:
+    size: 1Gi
+    path: <path to the directory>
+    hostname: <hostname>
+  ssl:
+    size: 100Mi
+    path: <path to the directory>
+    hostname: <hostname>
+
+sudo:
+  passwordHash:
+    secretName: code-server-secret
+    key: sudo-password-hash

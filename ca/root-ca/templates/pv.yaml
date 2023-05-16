@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "root-ca.storages.home.name" . }}
+spec:
+  capacity:
+    storage: {{ .Values.storages.home.size | quote }}
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: {{ include "root-ca.storages.home.name" . }}
+  local:
+    path: {{ .Values.storages.home.path | quote }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - {{ .Values.storages.home.hostname | quote }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "root-ca.storages.ssl.name" . }}
+spec:
+  capacity:
+    storage: {{ .Values.storages.ssl.size | quote }}
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: {{ include "root-ca.storages.ssl.name" . }}
+  local:
+    path: {{ .Values.storages.ssl.path | quote }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - {{ .Values.storages.ssl.hostname | quote }}
