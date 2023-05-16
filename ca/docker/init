@@ -1,11 +1,27 @@
 #!/bin/sh -e
 
+function mkdir_if_not_exist()
+{
+    if [ ! -d "${2}" ] ; then
+        mkdir -p "${2}"
+        chmod "${1}" "${2}"
+    fi
+}
+
 # Prepare a CA directory.
-mkdir -p /etc/ssl/CA/certs /etc/ssl/CA/private /etc/ssl/CA/crl /etc/ssl/CA/newcerts
-chmod 700 /etc/ssl/CA/private
-echo "01" > /etc/ssl/CA/serial
-echo "00" > /etc/ssl/CA/crlnumber
-touch /etc/ssl/CA/index.txt
+mkdir_if_not_exist 755 "/etc/ssl/CA/certs"
+mkdir_if_not_exist 755 "/etc/ssl/CA/private"
+mkdir_if_not_exist 755 "/etc/ssl/CA/crl"
+mkdir_if_not_exist 700 "/etc/ssl/CA/newcerts"
+if [ ! -f "/etc/ssl/CA/serial" ] ; then
+    echo "01" > /etc/ssl/CA/serial
+fi
+if [ ! -f "/etc/ssl/CA/crlnumber" ] ; then
+    echo "00" > /etc/ssl/CA/crlnumber
+fi
+if [ ! -f "/etc/ssl/CA/index.txt"] ; then
+    touch /etc/ssl/CA/index.txt
+fi
 
 # Invoke the original init script.
 . /init-orig
