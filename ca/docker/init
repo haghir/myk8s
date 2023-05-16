@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+# Prepare a CA directory.
+mkdir -p /etc/ssl/CA/certs /etc/ssl/CA/private /etc/ssl/CA/crl /etc/ssl/CA/newcerts
+chmod 700 /etc/ssl/CA/private
+echo "01" > /etc/ssl/CA/serial
+echo "00" > /etc/ssl/CA/crlnumber
+touch /etc/ssl/CA/index.txt
+
+# Invoke the original init script.
+source /init-orig
