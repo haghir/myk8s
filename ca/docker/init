@@ -8,4 +8,4 @@ echo "00" > /etc/ssl/CA/crlnumber
 touch /etc/ssl/CA/index.txt
 
 # Invoke the original init script.
-source /init-orig
+. /init-orig
