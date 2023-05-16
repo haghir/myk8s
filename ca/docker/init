@@ -10,9 +10,9 @@ mkdir_if_not_exist()
 
 # Prepare a CA directory.
 mkdir_if_not_exist 755 "/etc/ssl/CA/certs"
-mkdir_if_not_exist 755 "/etc/ssl/CA/private"
+mkdir_if_not_exist 700 "/etc/ssl/CA/private"
 mkdir_if_not_exist 755 "/etc/ssl/CA/crl"
-mkdir_if_not_exist 700 "/etc/ssl/CA/newcerts"
+mkdir_if_not_exist 755 "/etc/ssl/CA/newcerts"
 if [ ! -f "/etc/ssl/CA/serial" ] ; then
     echo "01" > /etc/ssl/CA/serial
 fi
