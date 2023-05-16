@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-function mkdir_if_not_exist()
+mkdir_if_not_exist()
 {
     if [ ! -d "${2}" ] ; then
         mkdir -p "${2}"
