@@ -27,5 +27,5 @@ storages:
 
 sudo:
   passwordHash:
-    secretName: code-server-secret
+    secretName: root-ca-secret
     key: sudo-password-hash
