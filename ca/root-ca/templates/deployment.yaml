@@ -42,7 +42,7 @@ spec:
       volumes:
       - name: home
         persistentVolumeClaim:
-          claimName: {{ include "code-server.storages.home.name" . }}
+          claimName: {{ include "root-ca.storages.home.name" . }}
       - name: ssl
         persistentVolumeClaim:
-          claimName: {{ include "code-server.storages.ssl.name" . }}
+          claimName: {{ include "root-ca.storages.ssl.name" . }}
