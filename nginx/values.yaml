@@ -38,6 +38,10 @@ ingress:
     paths:
     - path: /
       pathType: ImplementationSpecific
+  - host: ca
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
   - host: redmine
     paths:
     - path: /
