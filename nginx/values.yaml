@@ -34,10 +34,6 @@ ingress:
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: root-ca
-    paths:
-    - path: /
-      pathType: ImplementationSpecific
   - host: ca
     paths:
     - path: /
