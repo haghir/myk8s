@@ -20,10 +20,6 @@ storages:
     size: 1Gi
     path: <path to the directory>
     hostname: <hostname>
-  ssl:
-    size: 100Mi
-    path: <path to the directory>
-    hostname: <hostname>
 
 sudo:
   passwordHash:
