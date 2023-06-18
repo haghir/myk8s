@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "intermediate-ca.fullname" . }}
+  name: {{ include "ca.fullname" . }}
   labels:
-    {{- include "intermediate-ca.labels" . | nindent 4 }}
+    {{- include "ca.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "intermediate-ca.selectorLabels" . | nindent 6 }}
+      {{- include "ca.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "intermediate-ca.selectorLabels" . | nindent 8 }}
+        {{- include "ca.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
@@ -25,8 +25,6 @@ spec:
         volumeMounts:
         - name: home
           mountPath: /config
-        - name: ssl
-          mountPath: /etc/ssl/CA
         env:
         - name: PUID
           value: "{{ .Values.env.puid }}"
@@ -42,7 +40,4 @@ spec:
       volumes:
       - name: home
         persistentVolumeClaim:
-          claimName: {{ include "intermediate-ca.storages.home.name" . }}
-      - name: ssl
-        persistentVolumeClaim:
-          claimName: {{ include "intermediate-ca.storages.ssl.name" . }}
+          claimName: {{ include "ca.storages.home.name" . }}

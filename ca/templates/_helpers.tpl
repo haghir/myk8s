@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "intermediate-ca.name" -}}
+{{- define "ca.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "intermediate-ca.fullname" -}}
+{{- define "ca.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "intermediate-ca.chart" -}}
+{{- define "ca.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "intermediate-ca.labels" -}}
-helm.sh/chart: {{ include "intermediate-ca.chart" . }}
-{{ include "intermediate-ca.selectorLabels" . }}
+{{- define "ca.labels" -}}
+helm.sh/chart: {{ include "ca.chart" . }}
+{{ include "ca.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "intermediate-ca.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "intermediate-ca.name" . }}
+{{- define "ca.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "ca.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "intermediate-ca.serviceAccountName" -}}
+{{- define "ca.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "intermediate-ca.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "ca.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -64,13 +64,6 @@ Create the name of the service account to use
 {{/*
 Create the name of the storage mounted as the home directory.
 */}}
-{{- define "intermediate-ca.storages.home.name" -}}
-{{- printf "%s-storage-home" (include "intermediate-ca.fullname" .) -}}
-{{- end -}}
-
-{{/*
-Create the name of the storage mounted as the ssl directory.
-*/}}
-{{- define "intermediate-ca.storages.ssl.name" -}}
-{{- printf "%s-storage-ssl" (include "intermediate-ca.fullname" .) -}}
+{{- define "ca.storages.home.name" -}}
+{{- printf "%s-storage-home" (include "ca.fullname" .) -}}
 {{- end -}}

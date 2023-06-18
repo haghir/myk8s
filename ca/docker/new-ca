@@ -1,0 +1,24 @@
+#!/bin/sh
+
+mkdir_if_not_exist()
+{
+	if [ ! -d "${2}" ] ; then
+		mkdir -p "${2}"
+		chmod "${1}" "${2}"
+	fi
+}
+
+# Prepare a CA directory.
+mkdir_if_not_exist 755 "CA/certs"
+mkdir_if_not_exist 700 "CA/private"
+mkdir_if_not_exist 755 "CA/crl"
+mkdir_if_not_exist 755 "CA/newcerts"
+if [ ! -f "CA/serial" ] ; then
+	echo "01" > CA/serial
+fi
+if [ ! -f "CA/crlnumber" ] ; then
+	echo "00" > CA/crlnumber
+fi
+if [ ! -f "CA/index.txt" ] ; then
+	touch CA/index.txt
+fi
