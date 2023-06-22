@@ -4,6 +4,6 @@ RUN apt update && apt upgrade -y && apt autoremove -y && apt install -y apt-tran
 RUN curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | \
     tee /etc/apt/sources.list.d/helm-stable-debian.list
-RUN apt update && apt install -y libssl-dev libgnutls28-dev libsqlite3-dev \
+RUN apt update && apt install -y libssl-dev libgnutls28-dev libsqlite3-dev zlib1g-dev \
     build-essential pkg-config automake autoconf libtool \
     bsdextrautils pandoc graphviz helm p7zip-full zip unzip gettext man pwgen
