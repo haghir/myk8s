@@ -25,6 +25,8 @@ spec:
         volumeMounts:
         - name: home
           mountPath: /config
+        - name: local
+          mountPath: /usr/local
         env:
         - name: PUID
           value: "{{ .Values.env.puid }}"
@@ -41,3 +43,6 @@ spec:
       - name: home
         persistentVolumeClaim:
           claimName: {{ include "code-server.storages.home.name" . }}
+      - name: local
+        persistentVolumeClaim:
+          claimName: {{ include "code-server.storages.local.name" . }}
