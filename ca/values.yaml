@@ -18,6 +18,12 @@ service:
 storages:
   home:
     size: 1Gi
+    mode: Filesystem
+    path: <path to the directory>
+    hostname: <hostname>
+  local:
+    size: 1Gi
+    mode: Filesystem
     path: <path to the directory>
     hostname: <hostname>
 

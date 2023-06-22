@@ -21,5 +21,6 @@ db:
 storages:
   html:
     size: 10Gi
+    mode: Filesystem
     path: <path to the directory>
     hostname: <hostname>

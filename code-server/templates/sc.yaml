@@ -4,3 +4,10 @@ metadata:
   name: {{ include "code-server.storages.home.name" . }}
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ include "code-server.storages.local.name" . }}
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer

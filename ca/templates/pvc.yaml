@@ -5,8 +5,21 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  volumeMode: Filesystem
+  volumeMode: {{ .Values.storages.home.mode | quote }}
   resources:
     requests:
       storage: {{ .Values.storages.home.size | quote }}
   storageClassName: {{ include "ca.storages.home.name" . }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "ca.storages.local.name" . }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: {{ .Values.storages.local.mode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.storages.local.size | quote }}
+  storageClassName: {{ include "ca.storages.local.name" . }}

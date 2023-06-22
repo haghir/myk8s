@@ -4,8 +4,8 @@ metadata:
   name: {{ include "gitlab.storages.data.name" . }}
 spec:
   accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
+  - ReadWriteOnce
+  volumeMode: {{ .Values.storages.data.mode | quote }}
   resources:
     requests:
       storage: {{ .Values.storages.data.size | quote }}
@@ -17,8 +17,8 @@ metadata:
   name: {{ include "gitlab.storages.config.name" . }}
 spec:
   accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
+  - ReadWriteOnce
+  volumeMode: {{ .Values.storages.config.mode | quote }}
   resources:
     requests:
       storage: {{ .Values.storages.config.size | quote }}

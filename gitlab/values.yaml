@@ -15,9 +15,11 @@ services:
 storages:
   data:
     path: <path to data storage>
+    mode: Filesystem
     size: 20Gi
     hostname: <hostname>
   config:
     path: <path to config storage>
+    mode: Filesystem
     size: 1Gi
     hostname: <hostname>

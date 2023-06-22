@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  volumeMode: Filesystem
+  volumeMode: {{ .Values.storages.html.mode | quote }}
   resources:
     requests:
       storage: {{ .Values.storages.html.size | quote }}

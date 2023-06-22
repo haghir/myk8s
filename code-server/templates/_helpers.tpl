@@ -68,3 +68,10 @@ Create the name of the storage mounted as the home directory.
 {{- define "code-server.storages.home.name" -}}
 {{- printf "%s-storage-home" (include "code-server.fullname" .) -}}
 {{- end -}}
+
+{{/*
+Create the name of the storage mounted as the local directory.
+*/}}
+{{- define "code-server.storages.local.name" -}}
+{{- printf "%s-storage-local" (include "code-server.fullname" .) -}}
+{{- end -}}

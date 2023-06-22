@@ -13,6 +13,7 @@ service:
 storages:
   data:
     size: 10Gi
+    mode: Filesystem
     path: <path to storage>
     hostname: <hostname>
 

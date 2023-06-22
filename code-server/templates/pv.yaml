@@ -20,3 +20,26 @@ spec:
           operator: In
           values:
           - {{ .Values.storages.home.hostname | quote }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "code-server.storages.local.name" . }}
+spec:
+  capacity:
+    storage: {{ .Values.storages.local.size | quote }}
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: {{ include "code-server.storages.local.name" . }}
+  local:
+    path: {{ .Values.storages.local.path | quote }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - {{ .Values.storages.local.hostname | quote }}

@@ -53,6 +53,7 @@ ingress:
 
 storages:
   config:
-    path: <path to config storage>
     size: 10Mi
+    mode: Filesystem
+    path: <path to config storage>
     hostname: <hostname>

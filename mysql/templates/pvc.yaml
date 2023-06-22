@@ -5,8 +5,8 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  volumeMode: Filesystem
+  volumeMode: {{ .Values.storages.data.mode | quote }}
   resources:
     requests:
-      storage: "{{ .Values.storages.data.size }}"
+      storage: {{ .Values.storages.data.size | quote }}
   storageClassName: {{ include "mysql.storages.data.name" . }}
