@@ -5,7 +5,7 @@ ls | while read SNAME ; do
 		continue
 	fi
 
-	if [ helm status "${SNAME}" ] ; then
+	if helm status "${SNAME}" ; then
 		continue
 	fi
 
