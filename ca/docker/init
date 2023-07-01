@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+# Copy original contents to /usr/local
+copy_dir()
+{
+	SRC_DIR="${1}"
+	DST_DIR="${2}"
+
+	ls -a "${1}" | while read FNAME ; do
+		if [ "${FNAME}" = "." -o "${FNAME}" = ".." ] ; then
+			continue
+		fi
+
+		if [ -e "${DST_DIR}/${FNAME}" ] ; then
+			continue
+		fi
+
+		cp -rp "${SRC_DIR}/${FNAME}" "${DST_DIR}"
+	done
+}
+copy_dir /usr/local-orig /usr/local
+
+. /init-orig
