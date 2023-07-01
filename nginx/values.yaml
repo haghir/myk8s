@@ -24,25 +24,28 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-body-size: "1g"
-  domain: <domain>
   hosts:
-  - host: gitlab
+  - host: crl.example.com
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: vscode
+  - host: gitlab.example.com
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: ca
+  - host: vscode.example.com
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: redmine
+  - host: ca.example.com
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: wordpress
+  - host: redmine.example.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  - host: wordpress.example.com
     paths:
     - path: /
       pathType: ImplementationSpecific
