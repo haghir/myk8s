@@ -8,10 +8,10 @@ RUN apt update && apt install -y libssl-dev libgnutls28-dev libsqlite3-dev zlib1
     build-essential pkg-config automake autoconf libtool \
     bsdextrautils pandoc graphviz helm p7zip-full zip unzip gettext man pwgen
 
-# Backup the original contents of /usr/local
-RUN cp -rp /usr/local /usr/local-orig
-
 # Prepare scripts
 RUN mv /init /init-orig
 COPY init /init
 RUN chmod 755 /init
+
+# Backup the original contents of /usr/local
+RUN cp -rp /usr/local /usr/local-orig
