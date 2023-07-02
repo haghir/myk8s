@@ -23,7 +23,7 @@ spec:
           containerPort: 80
           protocol: TCP
         volumeMounts:
-        - name: conrig
+        - name: config
           mountPath: /etc/nginx/conf.d
         - name: crl
           mountPath: /var/lib/crl
