@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "nginx.storages.crl.name" . }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: {{ .Values.storages.crl.mode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.storages.crl.size | quote }}
+  storageClassName: {{ include "nginx.storages.crl.name" . }}

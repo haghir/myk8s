@@ -25,27 +25,23 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-body-size: "1g"
   hosts:
-  - host: crl.example.com
+  - host: gitlab.example.local
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: gitlab.example.com
+  - host: vscode.example.local
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: vscode.example.com
+  - host: ca.example.local
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: ca.example.com
+  - host: redmine.example.local
     paths:
     - path: /
       pathType: ImplementationSpecific
-  - host: redmine.example.com
-    paths:
-    - path: /
-      pathType: ImplementationSpecific
-  - host: wordpress.example.com
+  - host: wordpress.example.local
     paths:
     - path: /
       pathType: ImplementationSpecific
@@ -59,9 +55,4 @@ storages:
     size: 10Mi
     mode: Filesystem
     path: <path to config storage>
-    hostname: <hostname>
-  crl:
-    size: 10Mi
-    mode: Filesystem
-    path: <path to crl storage>
     hostname: <hostname>
