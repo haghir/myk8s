@@ -23,9 +23,14 @@ spec:
           containerPort: 80
           protocol: TCP
         volumeMounts:
+        - name: conrig
+          mountPath: /etc/nginx/conf.d
         - name: crl
           mountPath: /var/lib/crl
       volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "nginx.storages.config.name" . }}
       - name: crl
         persistentVolumeClaim:
           claimName: {{ include "nginx.storages.crl.name" . }}

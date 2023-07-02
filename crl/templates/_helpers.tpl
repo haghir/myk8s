@@ -62,8 +62,15 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+ Create the name of the config storage
+ */}}
+{{- define "nginx.storages.config.name" -}}
+{{- printf "%s-storage-config" (include "crl.fullname" .) -}}
+{{- end -}}
+
+{{/*
  Create the name of the crl storage
  */}}
 {{- define "nginx.storages.crl.name" -}}
-{{- printf "%s-storage-config" (include "crl.fullname" .) -}}
+{{- printf "%s-storage-crl" (include "crl.fullname" .) -}}
 {{- end -}}

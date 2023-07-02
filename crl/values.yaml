@@ -27,6 +27,11 @@ ingress:
   tls: []
 
 storages:
+  config:
+    size: 10Mi
+    mode: Filesystem
+    path: <path to config storage>
+    hostname: <hostname>
   crl:
     size: 10Mi
     mode: Filesystem
