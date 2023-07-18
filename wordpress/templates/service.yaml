@@ -10,6 +10,9 @@ spec:
   - name: http
     port: {{ .Values.service.port }}
     targetPort: http
+    {{- with .Values.service.nodePort }}
+    nodePort: {{ . }}
+    {{- end }}
     protocol: TCP
   selector:
     {{- include "wordpress.selectorLabels" . | nindent 4 }}

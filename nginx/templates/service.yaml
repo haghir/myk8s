@@ -10,6 +10,9 @@ spec:
   - name: http
     port: {{ .Values.services.http.port }}
     targetPort: http
+    {{- with .Values.services.http.nodePort }}
+    nodePort: {{ . }}
+    {{- end }}
     protocol: TCP
   selector:
     {{- include "nginx.selectorLabels" . | nindent 4 }}
